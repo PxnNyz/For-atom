@@ -1,0 +1,103 @@
+/* Custom styles for SkinScan */
+
+/* Upload area styling */
+.upload-area {
+    border: 2px dashed var(--bs-gray-500);
+    border-radius: 8px;
+    padding: 2.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+    border-color: var(--bs-primary);
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+.upload-area.highlight {
+    border-color: var(--bs-primary);
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+.upload-area.uploaded {
+    border-style: solid;
+    border-color: var(--bs-success);
+}
+
+.upload-icon {
+    margin-bottom: 1rem;
+}
+
+/* Image preview */
+.preview-container {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#image-preview {
+    max-height: 250px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Results page */
+.max-height-400 {
+    max-height: 400px;
+    object-fit: contain;
+}
+
+/* Page transitions */
+.fade-in {
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bs-gray-800);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bs-gray-600);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bs-gray-500);
+}
+
+/* Alert styling */
+.alert {
+    border-radius: 8px;
+}
+
+/* Card hover effects */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .upload-area {
+        padding: 1.5rem;
+    }
+    
+    #image-preview {
+        max-height: 200px;
+    }
+}
