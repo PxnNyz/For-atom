@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const previewContainer = document.getElementById('image-preview-container');
     const imagePreview = document.getElementById('image-preview');
     const analyzeBtn = document.getElementById('analyze-btn');
+    const datasetContainer = document.getElementById('dataset-comparison-container');
+    let datasetList = [];
     
     if (uploadArea) {
         // Add event listeners for drag and drop functionality
@@ -82,6 +84,44 @@ document.addEventListener('DOMContentLoaded', function() {
             
             reader.readAsDataURL(file);
         }
+    }
+
+    // Fetch dataset list only once
+    function loadDatasetList() {
+        if (datasetList.length) return Promise.resolve(datasetList);
+        return fetch('static/dataset_images.json')
+            .then(r => r.json())
+            .then(list => {
+                datasetList = list;
+                return list;
+            });
+    }
+
+    function showRandomDatasetImages() {
+        loadDatasetList().then(list => {
+            datasetContainer.innerHTML = '';
+            if (!list.length) return;
+            const sample = [];
+            const max = Math.min(4, list.length);
+            while (sample.length < max) {
+                const idx = Math.floor(Math.random() * list.length);
+                const chosen = list[idx];
+                if (!sample.includes(chosen)) sample.push(chosen);
+            }
+            sample.forEach(path => {
+                const col = document.createElement('div');
+                col.className = 'col-6 col-md-3';
+                const img = document.createElement('img');
+                img.src = path;
+                img.className = 'img-fluid border';
+                col.appendChild(img);
+                datasetContainer.appendChild(col);
+            });
+        });
+    }
+
+    if (analyzeBtn) {
+        analyzeBtn.addEventListener('click', showRandomDatasetImages);
     }
     
     // Initialize tooltips
